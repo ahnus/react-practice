@@ -5,28 +5,30 @@
  </body>
  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+ <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
  <script type="text/babel">
-    function Btn({text, changeValue}) {
+    function Btn({text, fontSize}) {
       return (
         <button 
-          onClick={changeValue}
           style={{
             backgroundColor: "pink",
             border: 0,
             borderRadius: 10,
-            fontSize: 20, }}>
+            fontSize: fontSize, }}>
           {text}</button>
       )
     }
-    const MemorizedBtn = React.memo(Btn);
+    Btn.protoTypes = {
+      text: PropTypes.string,
+      fontSize: PropTypes.number,
+    };
     function App() {
       const [value, setValue] = React.useState("Save Changes")
       const changeValue = () => setValue("Revert Change")
       return (
         <div>
-          <Btn text={value} changeValue={changeValue} />
-          <Btn text="Continue" />
+          <Btn text="Continue" fontSize={20} />
         </div>
       );
     }
